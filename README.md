@@ -31,14 +31,23 @@ matmul_mpi/
 └── README.md # Este archivo
 
 
-## 🛠 Requisitos
 
-- Compilador C (gcc/clang)
-- Implementación MPI (OpenMPI o MPICH)
-- Linux/macOS (probado en Ubuntu 22.04 y macOS Monterey)
+## 🛠 Requisitos Mínimos
 
-## 🚀 Compilación y Ejecución
+- **OpenMPI** 4.0+ o **MPICH** 3.3+
+- **gcc** 9.0+ o **clang** 10.0+
+- **Linux** (Ubuntu/Debian recomendado) o **macOS**
+- 4GB RAM (para matrices >2000x2000)
 
-1. **Compilar el proyecto**:
-   ```bash
-   make all
+## 🔥 Instalación Rápida
+
+```bash
+# Clonar repositorio
+git clone https://github.com/tu_usuario/matmul_mpi.git
+cd matmul_mpi
+
+# Compilar (usando Makefile)
+make all
+
+# Verificar instalación
+./bin/matmul_mpi --version
