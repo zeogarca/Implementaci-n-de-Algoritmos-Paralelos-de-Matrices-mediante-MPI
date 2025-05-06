@@ -1,1 +1,1 @@
-# Implementaci-n-de-Algoritmos-Paralelos-de-Matrices-mediante-MPI
+# Implementación de Algoritmos Paralelos de Matrices mediante MPI
