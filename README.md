@@ -15,21 +15,20 @@ Un algoritmo eficiente para multiplicar matrices grandes utilizando computación
 ## 📦 Estructura del Proyecto
 
 matmul_mpi/
-├── bin/ # Ejecutables compilados
-├── data/ # Matrices de prueba (opcional)
-├── docs/ # Documentación técnica
-├── include/ # Cabeceras (.h)
-│ ├── matrix.h # Operaciones con matrices
-│ └── utils.h # Funciones auxiliares
-├── src/ # Código fuente
-│ ├── matrix.c # Lógica de matrices
-│ ├── utils.c # Generación de datos
-│ └── matmul_mpi.c # Núcleo MPI
-├── tests/ # Casos de prueba
-├── Makefile # Sistema de compilación
-├── LICENSE # Licencia GPLv3
-└── README.md # Este archivo
-
+├── bin/            # Ejecutables compilados
+├── data/           # Matrices de prueba (opcional)
+├── docs/           # Documentación técnica
+├── include/        # Cabeceras (.h)
+│   ├── matrix.h    # Operaciones con matrices
+│   └── utils.h     # Funciones auxiliares
+├── src/            # Código fuente
+│   ├── matrix.c    # Lógica de matrices
+│   ├── utils.c     # Generación de datos
+│   └── matmul_mpi.c # Núcleo MPI
+├── tests/          # Casos de prueba
+├── Makefile        # Sistema de compilación
+├── LICENSE         # Licencia GPLv3
+└── README.md       # Este archivo
 
 
 ## 🛠 Requisitos Mínimos
