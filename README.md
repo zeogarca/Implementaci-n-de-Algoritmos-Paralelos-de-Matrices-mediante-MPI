@@ -81,7 +81,7 @@ A se va a distribuir, y B se transmite completa a todos los procesos.
         remaining_rows = N % size;
         local_rows = rows_per_proc + (rank < remaining_rows ? 1 : 0);
    
-Esto se hace para manejar matrices que no se dividen exactamente entre los procesos (carga balanceada).
+Esto se hace para manejar matrices que no se dividen exactamente entre los procesos.
 
 El offset calcula desde qué fila empieza cada proceso.
 
