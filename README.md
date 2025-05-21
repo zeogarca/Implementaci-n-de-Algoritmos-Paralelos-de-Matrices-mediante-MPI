@@ -49,4 +49,10 @@ El tiempo de ejecución se mide desde el proceso 0 con MPI_Wtime.
               
               ✅ Execution time: 0.605839 seconds
 
+## Resultado en Numpy
+
+              Resultados:
+              Tamaño de las matrices: 2000x2000
+              Tiempo de ejecución: 0.4345 segundos
+
 
