@@ -54,6 +54,25 @@ El tiempo de ejecución se mide desde el proceso 0 con MPI_Wtime.
               Tamaño de las matrices: 2000x2000
               Tiempo de ejecución: 0.4345 segundos
 
+## Proceso maestro (rank == 0):
+Es el proceso principal. Se encarga de:
+
+Crear las matrices completas (A y B) y llenarlas con valores.
+
+Dividir el trabajo (distribuir filas de A entre los procesos).
+
+Recolectar los resultados parciales para armar la matriz resultado C.
+
+Mostrar el tiempo de ejecución y (opcionalmente) las matrices.
+
+## Procesos esclavos (rank > 0):
+Son los procesos trabajadores que:
+
+Reciben su parte de filas de la matriz A para multiplicar por la matriz B.
+
+Ejecutan la multiplicación sólo sobre su pedazo asignado.
+
+Envían de vuelta los resultados parciales al maestro.
 
 ## 🧠 Inicialización
 
