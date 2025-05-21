@@ -1,52 +1,44 @@
-# Implementación de Algoritmos Paralelos de Matrices mediante MPI
+# ⚙️ Estructura General del Código
+1. Inicialización y entrada
+Se obtiene N (tamaño de la matriz) desde los argumentos del programa.
 
-![MPI Logo](https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Message_Passing_Interface_logo.svg/1200px-Message_Passing_Interface_logo.svg.png)
+Se inicializa MPI, se identifican rank (número de proceso) y size (número total de procesos).
 
-Un algoritmo eficiente para multiplicar matrices grandes utilizando computación paralela con el estándar MPI.
+2. División de trabajo
+Se calcula cuántas filas de la matriz A le corresponden a cada proceso (sendcounts, displs).
 
-## 📌 Características Clave
+Se reparte A entre procesos con MPI_Scatterv.
 
-- **Algoritmo paralelo** distribuido en múltiples procesos/nodos
-- **Soporte para matrices grandes** (limitado solo por la memoria disponible)
-- **Generación aleatoria** de matrices para pruebas
-- **Métricas de rendimiento**: Tiempo de ejecución y speedup
-- **Modo serial** incluido para comparación de resultados
+B se transmite completa a todos los procesos con MPI_Bcast.
 
-## 📦 Estructura del Proyecto
+3. Multiplicación local
+Cada proceso realiza la multiplicación de su parte de A con toda B, almacenando el resultado en local_C.
 
-matmul_mpi/
-├── bin/            # Ejecutables compilados
-├── data/           # Matrices de prueba (opcional)
-├── docs/           # Documentación técnica
-├── include/        # Cabeceras (.h)
-│   ├── matrix.h    # Operaciones con matrices
-│   └── utils.h     # Funciones auxiliares
-├── src/            # Código fuente
-│   ├── matrix.c    # Lógica de matrices
-│   ├── utils.c     # Generación de datos
-│   └── matmul_mpi.c # Núcleo MPI
-├── tests/          # Casos de prueba
-├── Makefile        # Sistema de compilación
-├── LICENSE         # Licencia GPLv3
-└── README.md       # Este archivo
+Se utiliza OpenMP para paralelizar el ciclo anidado de multiplicación.
 
+4. Recolección de resultados
+Se utiliza MPI_Gatherv para juntar todas las partes de C en el proceso raíz (rank 0).
 
-## 🛠 Requisitos Mínimos
+El tiempo de ejecución se mide desde el proceso 0 con MPI_Wtime.
 
-- **OpenMPI** 4.0+ o **MPICH** 3.3+
-- **gcc** 9.0+ o **clang** 10.0+
-- **Linux** (Ubuntu/Debian recomendado) o **macOS**
-- 4GB RAM (para matrices >2000x2000)
+5. Finalización
+Se imprimen las matrices si son pequeñas (N <= 16) y el tiempo total de ejecución.
 
-## 🔥 Instalación Rápida
+Se libera memoria y se finaliza MPI.
 
-```bash
-# Clonar repositorio
-git clone https://github.com/tu_usuario/matmul_mpi.git
-cd matmul_mpi
+#📊 Ventajas de la Implementación Actual
+✅ Aprovecha paralelismo a dos niveles: entre procesos (MPI) y entre hilos (OpenMP).
 
-# Compilar (usando Makefile)
-make all
+✅ Usa Scatterv y Gatherv, permitiendo una distribución equilibrada aunque N no sea divisible entre procesos.
 
-# Verificar instalación
-./bin/matmul_mpi --version
+✅ Puede correr en sistemas distribuidos y aprovechar múltiples núcleos.
+
+#❌ Limitaciones y Oportunidades de Mejora
+Área	Descripción	Mejora Propuesta
+Memoria	Cada proceso guarda una copia completa de B.	Distribuir B por bloques columnares.
+Caché	Multiplicación no optimizada para caché.	Usar tiling (blocking) para mejorar la localidad de memoria.
+OpenMP	Usa solo collapse(2) sin política de balanceo.	Agregar schedule(dynamic) para mejor balanceo.
+Modularidad	Todo el código está en main.	Separar en funciones (distribuir_matrices(), multiplicar_local(), etc).
+Validación	No se compara el resultado con un método secuencial.	Agregar comparación contra resultado secuencial en rank 0.
+Reutilización	Repetición de mallocs y liberación de memoria.	Crear funciones auxiliares para asignación y liberación.
+Escalabilidad	Podría saturar nodos con demasiados procesos MPI.	Usar un modelo híbrido bien balanceado (1 MPI por nodo + OpenMP por core).
