@@ -5,7 +5,7 @@ Se obtiene N (tamaño de la matriz) desde los argumentos del programa.
 Se inicializa MPI, se identifican rank (número de proceso) y size (número total de procesos).
 
 - División de trabajo:
-Se calcula cuántas filas de la matriz A le corresponden a cada proceso (sendcounts, displs).
+Se calcula cuántas filas de la matriz A le corresponden a cada proceso.
 
 Se reparte A entre procesos con MPI_Scatterv.
 
