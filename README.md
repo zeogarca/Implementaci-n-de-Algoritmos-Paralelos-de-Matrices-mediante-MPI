@@ -1,3 +1,8 @@
+## Multiplicación de Matrices
+
+![image](https://github.com/user-attachments/assets/39931cd0-8393-4ce7-bf8d-894a2bf9519a)
+
+
 # ⚙️ Estructura General del Código
 - Inicialización y entrada:
 Se obtiene N (tamaño de la matriz) desde los argumentos del programa.
