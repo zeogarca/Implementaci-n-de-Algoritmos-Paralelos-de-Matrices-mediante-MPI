@@ -1,10 +1,10 @@
 # ⚙️ Estructura General del Código
-1. Inicialización y entrada
+- Inicialización y entrada
 Se obtiene N (tamaño de la matriz) desde los argumentos del programa.
 
 Se inicializa MPI, se identifican rank (número de proceso) y size (número total de procesos).
 
-2. División de trabajo
+- División de trabajo
 Se calcula cuántas filas de la matriz A le corresponden a cada proceso (sendcounts, displs).
 
 Se reparte A entre procesos con MPI_Scatterv.
@@ -26,7 +26,7 @@ Se imprimen las matrices si son pequeñas (N <= 16) y el tiempo total de ejecuci
 
 Se libera memoria y se finaliza MPI.
 
-#📊 Ventajas de la Implementación Actual
+# 📊 Ventajas de la Implementación Actual
 ✅ Aprovecha paralelismo a dos niveles: entre procesos (MPI) y entre hilos (OpenMP).
 
 ✅ Usa Scatterv y Gatherv, permitiendo una distribución equilibrada aunque N no sea divisible entre procesos.
