@@ -34,3 +34,19 @@ El tiempo de ejecución se mide desde el proceso 0 con MPI_Wtime.
 |--------------|----------------------------------------------------------|-----------------------------------------------------------------------------|
 | **Memoria**      | Cada proceso guarda una copia completa de B.             | Distribuir B por bloques columnares.                                       |
 
+## Resultados Actuales
+
+              lgarcia@ce:~/m1$ mpirun -np 4 ./matrix_mpi_openmp 2000
+              
+              ✅ Execution time: 0.375169 seconds
+              lgarcia@ce:~/m1$ mpirun -np 8 ./matrix_mpi_openmp 2000
+              
+              ✅ Execution time: 0.457550 seconds
+              lgarcia@ce:~/m1$ mpirun -np 16 ./matrix_mpi_openmp 2000
+              
+              ✅ Execution time: 0.547565 seconds
+              lgarcia@ce:~/m1$ mpirun -np 24 ./matrix_mpi_openmp 2000
+              
+              ✅ Execution time: 0.605839 seconds
+
+
