@@ -50,3 +50,45 @@ El tiempo de ejecución se mide desde el proceso 0 con MPI_Wtime.
               Tiempo de ejecución: 0.4345 segundos
 
 
+## 🧠 Inicialización
+
+      MPI_Init(&argc, &argv);
+      MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+      MPI_Comm_size(MPI_COMM_WORLD, &size);
+      Se inicializa MPI.
+
+rank: el número de proceso actual.
+
+size: cantidad total de procesos.
+
+## 📦 Distribución de datos
+1. El proceso 0 crea las matrices:
+
+        if (rank == 0) {
+            A = malloc(...);
+            C = malloc(...);
+            fill_matrix(A, N);
+            fill_matrix(B, N);
+        }
+   
+Se generan dos matrices A y B con valores aleatorios.
+
+A se va a distribuir, y B se transmite completa a todos los procesos.
+
+2. Se calcula cuántas filas le toca a cada proceso:
+
+        rows_per_proc = N / size;
+        remaining_rows = N % size;
+        local_rows = rows_per_proc + (rank < remaining_rows ? 1 : 0);
+   
+Esto se hace para manejar matrices que no se dividen exactamente entre los procesos (carga balanceada).
+
+El offset calcula desde qué fila empieza cada proceso.
+
+3. Se usa MPI_Scatterv para enviar solo las filas necesarias de A a cada proceso:
+
+        MPI_Scatterv(A, sendcounts, displs, MPI_DOUBLE, A_local, ..., 0, MPI_COMM_WORLD);
+
+sendcounts y displs indican cuántos elementos enviar y desde qué posición.
+
+
