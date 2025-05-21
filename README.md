@@ -21,12 +21,6 @@ Se utiliza MPI_Gatherv para juntar todas las partes de C en el proceso raíz (ra
 
 El tiempo de ejecución se mide desde el proceso 0 con MPI_Wtime.
 
-# Implementación Actual
-- ✅ Aprovecha paralelismo a dos niveles: entre procesos (MPI) y entre hilos (OpenMP).
-
-- ✅ Usa Scatterv y Gatherv, permitiendo una distribución equilibrada aunque N no sea divisible entre procesos.
-
-- ✅ Puede correr en sistemas distribuidos y aprovechar múltiples núcleos.
 
 ### ❌ Mejoras en la siguiente entrega
 
