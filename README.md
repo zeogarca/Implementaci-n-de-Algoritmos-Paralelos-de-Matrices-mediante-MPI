@@ -4,7 +4,7 @@ Se obtiene N (tamaño de la matriz) desde los argumentos del programa.
 
 Se inicializa MPI, se identifican rank (número de proceso) y size (número total de procesos).
 
-- División de trabajo
+- División de trabajo:
 Se calcula cuántas filas de la matriz A le corresponden a cada proceso (sendcounts, displs).
 
 Se reparte A entre procesos con MPI_Scatterv.
@@ -16,7 +16,7 @@ Cada proceso realiza la multiplicación de su parte de A con toda B, almacenando
 
 Se utiliza OpenMP para paralelizar el ciclo anidado de multiplicación.
 
-- Recolección de resultados
+- Recolección de resultados:
 Se utiliza MPI_Gatherv para juntar todas las partes de C en el proceso raíz (rank 0).
 
 El tiempo de ejecución se mide desde el proceso 0 con MPI_Wtime.
