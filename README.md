@@ -6,29 +6,32 @@
 # Multiplicación de Matrices con MPI y OpenMP
 
 ## ¿Qué hace el programa?
+
 Este proyecto realiza la multiplicación de dos matrices cuadradas usando programación paralela. Utiliza dos tecnologías:
 
-MPI (Message Passing Interface) para repartir el trabajo entre varios procesos (por ejemplo, en distintas computadoras o núcleos).
+- MPI (Message Passing Interface) para repartir el trabajo entre varios procesos núcleos.
 
-OpenMP para aprovechar varios hilos dentro de cada proceso (por ejemplo, en una misma computadora con varios núcleos).
+- OpenMP para aprovechar varios hilos dentro de cada proceso.
 
 La combinación de ambas permite que el programa sea rápido y eficiente, aprovechando al máximo los recursos disponibles.
 
-¿Cómo está organizado el programa?
+## ¿Cómo está organizado el programa?
+
 El programa está dividido en dos tipos de procesos:
 
-Maestro (rank 0): es el que organiza todo. Crea las matrices A y B, reparte partes de ellas entre los demás procesos, y al final recoge los resultados.
+- Maestro (rank 0): es el que organiza todo. Crea las matrices A y B, reparte partes de ellas entre los demás procesos, y al final recoge los resultados.
 
-Esclavos (los demás procesos): reciben sus partes de las matrices y hacen su parte del cálculo. Luego envían el resultado de vuelta al maestro.
+- Esclavos (los demás procesos): reciben sus partes de las matrices y hacen su parte del cálculo. Luego envían el resultado de vuelta al maestro.
 
-Pasos del programa
-Inicio y lectura del tamaño de la matriz
+## Pasos del programa
 
-El usuario le dice al programa qué tamaño deben tener las matrices cuadradas (por ejemplo, 1000x1000).
+Inicio y lectura del tamaño de la matriz:
 
-Se inicializa MPI para que todos los procesos se preparen.
+- 1. El usuario le dice al programa qué tamaño deben tener las matrices cuadradas (por ejemplo, 1000x1000).
 
-Creación y reparto de datos (por el maestro)
+- 2. Se inicializa MPI para que todos los procesos se preparen.
+
+- Creación y reparto de datos (por el maestro)
 
 Se crean dos matrices aleatorias: A y B.
 
