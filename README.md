@@ -3,9 +3,9 @@
 ![image](https://github.com/user-attachments/assets/39931cd0-8393-4ce7-bf8d-894a2bf9519a)
 
 
-## Multiplicación de Matrices con MPI y OpenMP
+# Multiplicación de Matrices con MPI y OpenMP
 
-# ¿Qué hace el programa?
+## ¿Qué hace el programa?
 Este proyecto realiza la multiplicación de dos matrices cuadradas usando programación paralela. Utiliza dos tecnologías:
 
 MPI (Message Passing Interface) para repartir el trabajo entre varios procesos (por ejemplo, en distintas computadoras o núcleos).
