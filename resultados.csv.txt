@@ -1,0 +1,46 @@
+  GNU nano 8.1                                                                          timings_mmult.csv                                                                                    
+MPI_processes,OMP_threads,time_seconds
+1,1,0.561804
+1,2,0.441798
+1,3,0.447519
+1,4,0.447749
+1,6,0.442738
+1,8,0.443320
+2,1,0.141139
+2,2,0.110268
+2,3,0.110408
+2,4,0.110952
+2,6,0.111231
+2,8,0.111007
+4,1,0.036620
+4,2,0.034952
+4,3,0.021964
+4,4,0.018570
+4,6,0.016319
+4,8,0.011954
+8,1,0.009322
+8,2,0.011992
+8,3,0.009624
+8,4,0.009148
+8,6,0.010126
+8,8,0.013486
+16,1,0.004228
+16,2,0.007448
+16,3,0.007852
+16,4,0.011546
+16,6,0.017722
+16,8,0.029271
+24,1,0.002020
+24,2,0.003499
+24,3,0.012698
+24,4,0.017349
+24,6,0.032819
+24,8,0.048179
+
+
+
+
+
+                                                                    [ 37 líneas leídas (convertidas desde formato DOS) ]
+^G Ayuda         ^O Guardar       ^F Buscar        ^K Cortar        ^T Ejecutar      ^C Ubicación     M-U Deshacer     M-A Poner marca  M-] A llave      M-B Anterior     ◂ Atrás
+^X Salir         ^R Leer fich.    ^\ Reemplazar    ^U Pegar         ^J Justificar    ^/ Ir a línea    M-E Rehacer      M-6 Copiar       ^B Buscar atrás  M-F Siguiente    ▸ Adelante
