@@ -1,0 +1,46 @@
+  GNU nano 8.1                                                                               mmult.c                                                                                         
+#include <mpi.h>
+#include <omp.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+void fill_matrix(double *matrix, int rows, int cols) {
+    for (int i = 0; i < rows * cols; i++)
+        matrix[i] = rand() % 10;
+}
+
+// Para debug sólo, imprime una matriz genérica
+void print_matrix(double *matrix, int rows, int cols) {
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++)
+            printf("%6.2f ", matrix[i * cols + j]);
+        printf("\n");
+    }
+    printf("\n");
+}
+
+int main(int argc, char *argv[]) {
+    int rank, size, N;
+    double *A = NULL, *B = NULL, *C = NULL;
+    double *A_local, *B_local, *C_local;
+    int *sendcnts_B, *displs_B, *sendcnts_C, *displs_C;
+    double start, end;
+
+    MPI_Init(&argc, &argv);
+    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+    MPI_Comm_size(MPI_COMM_WORLD, &size);
+
+    if (argc != 2) {
+        if (rank == 0) printf("Uso: %s <tamaño N>\n", argv[0]);
+        MPI_Finalize();
+        return 1;
+    }
+    N = atoi(argv[1]);
+
+    // ----------------------------------------------------------------
+    // 1) Distribución de filas de A (igual que antes)
+    int rows_per_proc = N / size;
+    int rem_rows      = N % size;
+                                                                                    [ 184 líneas leídas ]
+^G Ayuda         ^O Guardar       ^F Buscar        ^K Cortar        ^T Ejecutar      ^C Ubicación     M-U Deshacer     M-A Poner marca  M-] A llave      M-B Anterior     ◂ Atrás
+^X Salir         ^R Leer fich.    ^\ Reemplazar    ^U Pegar         ^J Justificar    ^/ Ir a línea    M-E Rehacer      M-6 Copiar       ^B Buscar atrás  M-F Siguiente    ▸ Adelante
