@@ -30,11 +30,9 @@ Inicio y lectura del tamaño de la matriz:
 1. El usuario le dice al programa qué tamaño deben tener las matrices cuadradas (por ejemplo, 1000x1000).
 2. Se inicializa MPI para que todos los procesos se preparen.
 3. Creación y reparto de datos (por el maestro)
-  - Se crean dos matrices aleatorias: A y B.
-
-La matriz A se divide por filas, y la matriz B se divide por columnas.
-
-Cada proceso recibe una parte de A y una parte de B, según lo que le toca.
+3.1. Se crean dos matrices aleatorias: A y B.
+3.2. La matriz A se divide por filas, y la matriz B se divide por columnas.
+3.3. Cada proceso recibe una parte de A y una parte de B, según lo que le toca.
 
 Cómputo (todos los procesos)
 
