@@ -1,4 +1,3 @@
-  GNU nano 8.1                                                                          timings_mmult.csv                                                                                    
 MPI_processes,OMP_threads,time_seconds
 1,1,0.561804
 1,2,0.441798
@@ -36,11 +35,3 @@ MPI_processes,OMP_threads,time_seconds
 24,4,0.017349
 24,6,0.032819
 24,8,0.048179
-
-
-
-
-
-                                                                    [ 37 líneas leídas (convertidas desde formato DOS) ]
-^G Ayuda         ^O Guardar       ^F Buscar        ^K Cortar        ^T Ejecutar      ^C Ubicación     M-U Deshacer     M-A Poner marca  M-] A llave      M-B Anterior     ◂ Atrás
-^X Salir         ^R Leer fich.    ^\ Reemplazar    ^U Pegar         ^J Justificar    ^/ Ir a línea    M-E Rehacer      M-6 Copiar       ^B Buscar atrás  M-F Siguiente    ▸ Adelante
