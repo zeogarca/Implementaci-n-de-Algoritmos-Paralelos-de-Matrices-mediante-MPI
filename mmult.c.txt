@@ -1,4 +1,3 @@
-  GNU nano 8.1                                                                               mmult.c                                                                                         
 #include <mpi.h>
 #include <omp.h>
 #include <stdio.h>
@@ -41,6 +40,3 @@ int main(int argc, char *argv[]) {
     // 1) Distribución de filas de A (igual que antes)
     int rows_per_proc = N / size;
     int rem_rows      = N % size;
-                                                                                    [ 184 líneas leídas ]
-^G Ayuda         ^O Guardar       ^F Buscar        ^K Cortar        ^T Ejecutar      ^C Ubicación     M-U Deshacer     M-A Poner marca  M-] A llave      M-B Anterior     ◂ Atrás
-^X Salir         ^R Leer fich.    ^\ Reemplazar    ^U Pegar         ^J Justificar    ^/ Ir a línea    M-E Rehacer      M-6 Copiar       ^B Buscar atrás  M-F Siguiente    ▸ Adelante
