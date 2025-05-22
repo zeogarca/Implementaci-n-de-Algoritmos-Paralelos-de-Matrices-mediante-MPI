@@ -40,3 +40,4 @@ int main(int argc, char *argv[]) {
     // 1) Distribución de filas de A (igual que antes)
     int rows_per_proc = N / size;
     int rem_rows      = N % size;
+
