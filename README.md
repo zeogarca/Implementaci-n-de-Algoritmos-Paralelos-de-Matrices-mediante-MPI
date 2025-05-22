@@ -27,7 +27,7 @@ El programa está dividido en dos tipos de procesos:
 
 Inicio y lectura del tamaño de la matriz:
 
-- 1. El usuario le dice al programa qué tamaño deben tener las matrices cuadradas (por ejemplo, 1000x1000).
+1. El usuario le dice al programa qué tamaño deben tener las matrices cuadradas (por ejemplo, 1000x1000).
 
 - 2. Se inicializa MPI para que todos los procesos se preparen.
 
