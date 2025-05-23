@@ -1,9 +1,0 @@
-#ifndef UTILS_H
-#define UTILS_H
-
-#include "matrix.h"
-
-double random_double(double min, double max);
-void fill_matrix_random(Matrix mat, double min, double max);
-
-#endif
