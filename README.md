@@ -54,7 +54,7 @@ Recolección de resultados:
 
 ## Resultados Actuales
 ![image](https://github.com/user-attachments/assets/64b6433a-0322-4c57-9c72-99aaf0a9e99a)
-En este caso particular, parece que aumentar el número de procesos MPI (con pocos o un solo hilo OMP por proceso) tiende a dar mejores resultados globales que tener pocos procesos MPI con muchos hilos OMP cada uno, especialmente cuando se dispone de un gran número de unidades de procesamiento.
+- En este caso particular, parece que aumentar el número de procesos MPI (con pocos o un solo hilo OMP por proceso) tiende a dar mejores resultados globales que tener pocos procesos MPI con muchos hilos OMP cada uno, especialmente cuando se dispone de un gran número de unidades de procesamiento.
 ![image](https://github.com/user-attachments/assets/35285c8b-0cb4-4bda-92d4-b9360c3469f7)
-La estrategia de paralelización más efectiva cuando se dispone de un número considerable de unidades de procesamiento (representadas por el escalado hasta 24 procesos MPI) es utilizar muchos procesos MPI con un solo hilo OpenMP por proceso.
+- La estrategia de paralelización más efectiva cuando se dispone de un número considerable de unidades de procesamiento (representadas por el escalado hasta 24 procesos MPI) es utilizar muchos procesos MPI con un solo hilo OpenMP por proceso.
 El uso de un modelo híbrido con múltiples hilos OMP por proceso MPI solo es beneficioso cuando el número de procesos MPI es limitado (ej. 4 procesos MPI con 8 hilos OMP es una buena combinación localmente).
