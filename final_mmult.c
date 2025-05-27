@@ -8,15 +8,6 @@ void fill_matrix(double *matrix, int rows, int cols) {
         matrix[i] = rand() % 10;
 }
 
-// Para debug sólo, imprime una matriz genérica
-void print_matrix(double *matrix, int rows, int cols) {
-    for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < cols; j++)
-            printf("%6.2f ", matrix[i * cols + j]);
-        printf("\n");
-    }
-    printf("\n");
-}
 
 int main(int argc, char *argv[]) {
     int rank, size, N;
