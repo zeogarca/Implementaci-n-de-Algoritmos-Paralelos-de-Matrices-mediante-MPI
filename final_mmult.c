@@ -132,7 +132,6 @@ int main(int argc, char *argv[]) {
 
     // ----------------------------------------------------------------
     // 5) Recolección de bloques de columnas de C
-    // Necesitamos sendcnts_C y displs_C iguales a sendcnts_B/displs_B
     sendcnts_C = sendcnts_B;
     displs_C   = displs_B;
 
