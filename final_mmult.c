@@ -136,23 +136,6 @@ int main(int argc, char *argv[]) {
     if (rank == 0) {
         printf("Tiempo total: %.6f s con %d procesos y MPI+OpenMP\n",
                end - start, size);
-        // Si quieres ver C (para N pequeño), desempaca y muestra:
-        /*
-        printf("Matriz C completa:\n");
-        for (int r = 0; r < N; r++) {
-            for (int p = 0; p < size; p++) {
-                int cols_p = cols_per_proc + (p < rem_cols ? 1 : 0);
-                int start_col = p * cols_per_proc + (p < rem_cols ? p : rem_cols);
-                for (int c = 0; c < cols_p; c++) {
-                    printf("%6.2f ",
-                        C[ displs_C[p] + c * N + r ] );
-                }
-            }
-            printf("\n");
-        }
-        */
-    }
-
     // ----------------------------------------------------------------
     // limpieza
     free(A_local);
