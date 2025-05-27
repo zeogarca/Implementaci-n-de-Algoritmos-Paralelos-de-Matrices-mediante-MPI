@@ -38,7 +38,7 @@ Todos los procesos:
 
 1. Cada proceso multiplica las filas que le tocaron de A por las columnas de B que le llegaron.
 
-    - Para esto se usa OpenMP, que permite que dentro de cada proceso se usen varios hilos para hacer los cálculos más rápido.
+    - Para esto se usa OpenMP.
 
 Recolección de resultados:
 
