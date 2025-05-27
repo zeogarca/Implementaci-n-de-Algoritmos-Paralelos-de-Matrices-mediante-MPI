@@ -19,9 +19,9 @@ La combinación de ambas permite que el programa sea rápido y eficiente, aprove
 
 El programa está dividido en dos tipos de procesos:
 
-- Maestro (rank 0): es el que organiza todo. Crea las matrices A y B, reparte partes de ellas entre los demás procesos, y al final recoge los resultados.
+- Maestro: es el que organiza todo. Crea las matrices A y B, reparte partes de ellas entre los demás procesos, y al final recoge los resultados.
 
-- Esclavos (los demás procesos): reciben sus partes de las matrices y hacen su parte del cálculo. Luego envían el resultado de vuelta al maestro.
+- Esclavos: reciben sus partes de las matrices y hacen su parte del cálculo. Luego envían el resultado de vuelta al maestro.
 
 ## Pasos del programa
 
