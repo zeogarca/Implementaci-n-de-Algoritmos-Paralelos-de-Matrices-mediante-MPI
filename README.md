@@ -62,3 +62,5 @@ El resultado fue correcto, lo cual valida que la implementación es funcional y 
 ### Mapa de Calor del tiempo por número de procesos
 ![image](https://github.com/user-attachments/assets/52816c86-8a7f-4451-9d83-46af27626918)
 
+## Autor: Edgar Leonardo García Zavala
+
