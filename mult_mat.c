@@ -2,21 +2,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// Generador de números aleatorios entre 0 y 9
 void fill_matrix(int *mat, int N) {
     for (int i = 0; i < N * N; i++) {
         mat[i] = rand() % 10;
     }
 }
 
-// Extrae columna j de una matriz NxN
 void get_col(int *mat, int N, int j, int *col) {
     for (int i = 0; i < N; i++) {
         col[i] = mat[i * N + j];
     }
 }
 
-// Producto escalar de dos vectores de tamaño N
 int dot_product(int *row, int *col, int N) {
     int sum = 0;
     for (int i = 0; i < N; i++) {
@@ -34,7 +31,7 @@ int main(int argc, char *argv[]) {
     MPI_Comm_size(MPI_COMM_WORLD, &size);
 
     if (argc != 2) {
-        if (rank == MASTER)
+        if (rank == 0)
             printf("Uso: %s <tamaño N de la matriz>\n", argv[0]);
         MPI_Finalize();
         return 1;
@@ -49,7 +46,7 @@ int main(int argc, char *argv[]) {
         B = (int *)malloc(N * N * sizeof(int));
         C = (int *)malloc(N * N * sizeof(int));
 
-        srand(42); // Semilla fija para reproducibilidad
+        srand(42);
         fill_matrix(A, N);
         fill_matrix(B, N);
 
@@ -115,7 +112,7 @@ int main(int argc, char *argv[]) {
         free(B);
         free(C);
     } else {
-        // Código de los procesos esclavos
+        // Procesos esclavos
         while (1) {
             MPI_Status status;
             int row[N], col[N];
@@ -133,7 +130,7 @@ int main(int argc, char *argv[]) {
 
             MPI_Send(&result, 1, MPI_INT, 0, 4, MPI_COMM_WORLD);
             MPI_Send(&row_idx, 1, MPI_INT, 0, 5, MPI_COMM_WORLD);
-            MPI_Send(&col_idx, 1, MPI_INT, MASTER, 6, MPI_COMM_WORLD);
+            MPI_Send(&col_idx, 1, MPI_INT, 0, 6, MPI_COMM_WORLD);
         }
     }
 
