@@ -3,61 +3,62 @@
 ![image](https://github.com/user-attachments/assets/39931cd0-8393-4ce7-bf8d-894a2bf9519a)
 
 
-# Multiplicación de Matrices con MPI y OpenMP
+# Multiplicación de Matrices con MPI
 
-## ¿Qué hace el programa?
+# MPI Matrix Multiplication
 
-Este proyecto realiza la multiplicación de dos matrices cuadradas usando programación paralela. Utiliza dos tecnologías:
+Este proyecto implementa la multiplicación de matrices usando **MPI (Message Passing Interface)** en C, dividiendo el trabajo entre varios procesos para mejorar el rendimiento en sistemas paralelos o distribuidos.
 
-- MPI (Message Passing Interface) para repartir el trabajo entre varios procesos núcleos.
+## 🧠 ¿Qué hace este programa?
 
-- OpenMP para aprovechar varios hilos dentro de cada proceso.
+Realiza la multiplicación de dos matrices cuadradas `A` y `B` de tamaño `N x N`, distribuyendo el cálculo entre un **proceso maestro** y varios **procesos esclavos**.
 
-La combinación de ambas permite que el programa sea rápido y eficiente, aprovechando al máximo los recursos disponibles.
+El resultado es una matriz `C = A * B`.
 
-## ¿Cómo está organizado el programa?
+---
 
-El programa está dividido en dos tipos de procesos:
+## ⚙️ ¿Cómo funciona?
 
-- Maestro: es el que organiza todo. Crea las matrices A y B, reparte partes de ellas entre los demás procesos, y al final recoge los resultados.
+### 💻 Estructura del programa
 
-- Esclavos: reciben sus partes de las matrices y hacen su parte del cálculo. Luego envían el resultado de vuelta al maestro.
+- `rank 0`: Proceso maestro (orquesta el trabajo)
+- `rank 1 ... n`: Procesos esclavos (realizan productos punto)
 
-## Pasos del programa
+El maestro:
+1. Genera las matrices `A` y `B`.
+2. Divide el trabajo en tareas: cada celda de la matriz `C[i][j]` es una **tarea**.
+3. Envía a cada esclavo una tarea: la fila `i` de `A` y la columna `j` de `B`.
+4. Recibe los resultados y los coloca en la posición correcta de `C`.
+5. Cuando todas las tareas están hechas, envía una señal de parada a los esclavos.
 
-Inicio y lectura del tamaño de la matriz:
+Los esclavos:
+1. Reciben una fila y una columna.
+2. Calculan el producto punto: `C[i][j] = ∑ A[i][k] * B[k][j]`.
+3. Envían el resultado al maestro.
+4. Esperan más tareas, o terminan si reciben la señal de parada.
 
-1. El usuario le dice al programa qué tamaño deben tener las matrices cuadradas (por ejemplo, 1000x1000).
-2. Se inicializa MPI para que todos los procesos se preparen.
-3. Creación y reparto de datos (por el maestro)
-4. Se crean dos matrices aleatorias: A y B.
-5. La matriz A se divide por filas, y la matriz B se divide por columnas.
-6. Cada proceso recibe una parte de A y una parte de B, según lo que le toca.
+---
 
-Todos los procesos:
+### 📦 Archivos
 
-1. Cada proceso multiplica las filas que le tocaron de A por las columnas de B que le llegaron.
+- `mat_mul.c`: Código fuente principal.
 
-    - Para esto se usa OpenMP.
+## 🧪 Pruebas realizadas
 
-Recolección de resultados:
+Se probaron múltiples casos para asegurar la correcta implementación. Uno de los más importantes:
 
-1. Cada proceso genera un pedazo de la matriz resultado C.
+### ✅ Multiplicación por la matriz identidad
 
-    - El maestro junta todos esos pedazos para armar la matriz completa.
+Se generó una matriz `A` aleatoria y se multiplicó por la **matriz identidad `I`**, esperando que: A * I = A
 
-## Final
 
-- Se imprime cuánto tiempo tardó la operación.
+El resultado fue correcto, lo cual valida que la implementación es funcional y conserva las propiedades de la multiplicación de matrices.
 
-- Se libera la memoria usada y se termina el programa.
+## Resultados
 
-## Resultados Actuales
+### Tiempo de Ejecución por Número de procesos
+![image](https://github.com/user-attachments/assets/4eae2ee5-93d6-43c3-8f61-8103947d0a71)
 
-![image](https://github.com/user-attachments/assets/64b6433a-0322-4c57-9c72-99aaf0a9e99a)
-- En este caso particular, parece que aumentar el número de procesos MPI (con pocos o un solo hilo OMP por proceso) tiende a dar mejores resultados globales que tener pocos procesos MPI con muchos hilos OMP cada uno, especialmente cuando se dispone de un gran número de unidades de procesamiento.
+### Mapa de Calor del tiempo por número de procesos
+![image](https://github.com/user-attachments/assets/52816c86-8a7f-4451-9d83-46af27626918)
 
-## Mapa de calor
-![image](https://github.com/user-attachments/assets/35285c8b-0cb4-4bda-92d4-b9360c3469f7)
-- La estrategia de paralelización más efectiva cuando se dispone de un número considerable de unidades de procesamiento (representadas por el escalado hasta 24 procesos MPI) es utilizar muchos procesos MPI con un solo hilo OpenMP por proceso.
-El uso de un modelo híbrido con múltiples hilos OMP por proceso MPI solo es beneficioso cuando el número de procesos MPI es limitado (ej. 4 procesos MPI con 8 hilos OMP es una buena combinación localmente).
