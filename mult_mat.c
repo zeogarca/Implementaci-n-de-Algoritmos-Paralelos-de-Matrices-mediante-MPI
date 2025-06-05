@@ -2,8 +2,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define MASTER 0
-
 // Generador de números aleatorios entre 0 y 9
 void fill_matrix(int *mat, int N) {
     for (int i = 0; i < N * N; i++) {
@@ -46,7 +44,7 @@ int main(int argc, char *argv[]) {
 
     int *A = NULL, *B = NULL, *C = NULL;
 
-    if (rank == MASTER) {
+    if (rank == 0) {
         A = (int *)malloc(N * N * sizeof(int));
         B = (int *)malloc(N * N * sizeof(int));
         C = (int *)malloc(N * N * sizeof(int));
@@ -58,10 +56,8 @@ int main(int argc, char *argv[]) {
         int total_tasks = N * N;
         int next_task = 0;
 
-        // Inicia medición de tiempo justo antes de enviar las primeras tareas
         start_time = MPI_Wtime();
 
-        // Enviar tareas iniciales a todos los esclavos
         for (int i = 1; i < size && next_task < total_tasks; i++, next_task++) {
             int row_idx = next_task / N;
             int col_idx = next_task % N;
@@ -75,7 +71,6 @@ int main(int argc, char *argv[]) {
             MPI_Send(&col_idx, 1, MPI_INT, i, 3, MPI_COMM_WORLD);
         }
 
-        // Recibir resultados y mandar nuevas tareas
         while (next_task < total_tasks) {
             MPI_Status status;
             int result, row_idx, col_idx;
@@ -98,7 +93,6 @@ int main(int argc, char *argv[]) {
             next_task++;
         }
 
-        // Recibir últimos resultados pendientes
         for (int i = 1; i < size && i <= total_tasks; i++) {
             MPI_Status status;
             int result, row_idx, col_idx;
@@ -108,10 +102,8 @@ int main(int argc, char *argv[]) {
             C[row_idx * N + col_idx] = result;
         }
 
-        // Termina medición de tiempo después de recibir todo
         end_time = MPI_Wtime();
 
-        // Enviar señal de parada a todos los esclavos
         for (int i = 1; i < size; i++) {
             MPI_Send(NULL, 0, MPI_INT, i, 99, MPI_COMM_WORLD);
         }
@@ -129,18 +121,18 @@ int main(int argc, char *argv[]) {
             int row[N], col[N];
             int row_idx, col_idx;
 
-            MPI_Recv(row, N, MPI_INT, MASTER, MPI_ANY_TAG, MPI_COMM_WORLD, &status);
+            MPI_Recv(row, N, MPI_INT, 0, MPI_ANY_TAG, MPI_COMM_WORLD, &status);
             if (status.MPI_TAG == 99)
                 break; // señal de fin de trabajo
 
-            MPI_Recv(col, N, MPI_INT, MASTER, 1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-            MPI_Recv(&row_idx, 1, MPI_INT, MASTER, 2, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-            MPI_Recv(&col_idx, 1, MPI_INT, MASTER, 3, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+            MPI_Recv(col, N, MPI_INT, 0, 1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+            MPI_Recv(&row_idx, 1, MPI_INT, 0, 2, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+            MPI_Recv(&col_idx, 1, MPI_INT, 0, 3, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
 
             int result = dot_product(row, col, N);
 
-            MPI_Send(&result, 1, MPI_INT, MASTER, 4, MPI_COMM_WORLD);
-            MPI_Send(&row_idx, 1, MPI_INT, MASTER, 5, MPI_COMM_WORLD);
+            MPI_Send(&result, 1, MPI_INT, 0, 4, MPI_COMM_WORLD);
+            MPI_Send(&row_idx, 1, MPI_INT, 0, 5, MPI_COMM_WORLD);
             MPI_Send(&col_idx, 1, MPI_INT, MASTER, 6, MPI_COMM_WORLD);
         }
     }
