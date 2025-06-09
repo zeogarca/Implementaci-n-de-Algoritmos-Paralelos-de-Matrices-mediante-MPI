@@ -57,10 +57,7 @@ El resultado fue correcto, lo cual valida que la implementación es funcional y 
 ## Resultados
 
 ### Tiempo de Ejecución por Número de procesos
-![image](https://github.com/user-attachments/assets/4eae2ee5-93d6-43c3-8f61-8103947d0a71)
-
-### Mapa de Calor del tiempo por número de procesos
-![image](https://github.com/user-attachments/assets/52816c86-8a7f-4451-9d83-46af27626918)
+![image](https://github.com/user-attachments/assets/57221f27-806c-4e11-a89f-397c9ad301d7)
 
 ## Autor: Edgar Leonardo García Zavala
 
